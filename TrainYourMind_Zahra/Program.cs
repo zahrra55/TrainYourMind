@@ -1,6 +1,10 @@
-﻿using System;
+using System;
+using System.Diagnostics.Metrics;
+using System.Globalization;
+using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Zahra_Solutions
 {
@@ -399,13 +403,7 @@ namespace Zahra_Solutions
             }
         }
 
-        /*
-         11. Write a C# Sharp program to calculate the root of a quadratic equation.
-            Test Data :
-            Input the value of a : 1
-            Input the value of b : 5
-            Input the value of c : 7
-         */
+         // 11. Write a C# Sharp program to calculate the root of a quadratic equation.
         static void Task_35()
         {
             Console.Write("Test Data : \nInput the value of a : ");
@@ -833,12 +831,7 @@ namespace Zahra_Solutions
             2. Square
             3. Triangle
             4. Circle
-            5. Trapezoid //متوازي الاضلاع
-            Test Data :
-            Input your choice : 1
-            Input radius of the circle : 5
-            Expected Output :
-            The area is : 78.500000*/
+            5. Trapezoid //متوازي الاضلاع*/
         static void Task_48()
         {
             Console.WriteLine("Choose a shape to calculate its area:");
@@ -895,15 +888,213 @@ namespace Zahra_Solutions
                     Console.WriteLine("Sorry man, I'm not smart enough for that :)\nChoose between 1-5");
                     return; // Exit if the choice is invalid
             }
+        }
 
+        //1. Write a program in C# Sharp to input a string and print it
+        static void Task_49()
+        {
+            Console.Write("nput the string : ");
+            string input = Console.ReadLine(); // Read a string from the user
+            Console.WriteLine($"The string you entered is : {input}"); // Print the entered string
+        }
 
+        //2. Write a C# Sharp program to find the length of a string without using a library function
+        static void Task_50()
+        {
+            Console.Write("Input the string : ");
+            string input = Console.ReadLine(); // Read a string from the user
+            int length = 0; // Initialize length variable
+            
+            foreach (char c in input) // Iterate through each character in the string
+            {
+                length++; // Increment length for each character
+            }
+            
+            Console.WriteLine($"The length of the string is : {length}"); // Print the length of the string
+        }
+
+        //3. Write a C# Sharp program to separate individual characters from a string.
+        static void Task_51()
+        {
+            Console.Write("Input the string : ");
+            string str = Console.ReadLine(); // Read a string from the user
+            
+            Console.WriteLine("The characters are:");
+            foreach (char ch in str) // Iterate through each character in the string
+            {
+                Console.WriteLine(ch); // Print each character on a new line
+            }
+        }
+
+        // 4. Write a program in C# Sharp to print individual characters of the string in reverse order
+        static void Task_52()
+        {
+            Console.Write("Input the string : ");
+            string str = Console.ReadLine(); // Read a string from the user
+            
+            Console.WriteLine("The characters in reverse are:");
+            for (int i = str.Length - 1; i >= 0; i--) // Iterate through each character in reverse order
+            {
+                Console.WriteLine(str[i]); // Print each character on a new line
+            }
+        }
+
+        //5. Write a program in C# Sharp to count the total number of words in a string.
+        static void Task_53()
+        {
+            Console.Write("Input the string : ");
+            string str = Console.ReadLine();
+
+            // Split by whitespace, remove empty entries
+            string[] words = str.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries); // ignore and remove any empty strings from the result array.
+            // Split the string into words using whitespace as a delimiter 
+            int count_words = words.Length;
+
+            Console.WriteLine($"The total number of words in the string is : {count_words}");
+        }
+
+        //6. Write a program in C# Sharp to compare two strings without using a string library functions.
+        static void Task_54()
+        {
+            Console.Write("Input the first string: ");
+            string str1 = Console.ReadLine(); // Read the first string from the user
+            Console.Write("Input the second string: ");
+            string str2 = Console.ReadLine(); // Read the second string from the user
+            
+            if (str1 == str2) // Compare the two strings
+                Console.WriteLine("The length of both strings are equal and\nalso, both strings are equal.");
+            else
+                Console.WriteLine("The two strings are not equal.");
+        }
+
+        //7. Write a program in C# Sharp to count the number of alphabets, digits and special characters in a string
+        static void Task_55()
+        {
+            Console.Write("Input the string: ");
+            string str = Console.ReadLine(); // Read a string from the user
+            
+            int alphabets = 0, digits = 0, specials = 0; // Initialize counters
+            
+            foreach (char c in str) // Iterate through each character in the string
+            {
+                if (char.IsLetter(c)) // Check if the character is an alphabet
+                    alphabets++;
+                else if (char.IsDigit(c)) // Check if the character is a digit
+                    digits++;
+                else if (!char.IsWhiteSpace(c)) // Check if the character is not a whitespace
+                    specials++; // Count it as a special character
+            }
+            
+            Console.WriteLine($"Number of Alphabets in the string is : {alphabets}\n" +
+                $"Number of Digits in the string is : {digits}\n" +
+                $"Number of Special characters in the string is : {specials}");
+        }
+
+        //8. Write a program in C# Sharp to copy one string to another string
+        static void Task_56()
+        {
+            Console.Write("Input the first string: ");
+            string str1 = Console.ReadLine(); // Read the first string from the user
+            string str2 = str1; // Copy the first string to the second string
+            int n = str1.Length; // Get the length of the first string
+            Console.WriteLine($"The First string is : {str1}"+
+                $"\nThe Second string is : {str2}"+
+                $"\nNumber of characters copied : {n}"); // Print the copied string
+        }
+
+        /*9. Write a C# Sharp program to count the number of vowels or consonants in
+            a string.
+            Test Data :
+            Input the string : Welcome to halalAlmashakl.com
+            Expected Output :
+            The total number of vowel in the string is : 9
+            The total number of consonant in the string is : 12*/
+        static void Task_57()
+        {
+            Console.Write("Input the string :");
+            string str = Console.ReadLine();
+            str = str.ToLower();
+            int vowels = 0;
+            int consonants = 0;
+            for(int i = 0; i < str.Length; i++)
+            {
+                if ("aeiou".Contains(str[i]))
+                    vowels++;
+                else if (char.IsLetter(str[i]))
+                    consonants++;
+            }
+            Console.WriteLine($"\nThe total number of vowel in the string is : {vowels}");
+            Console.WriteLine($"\nThe total number of consonant in the string is : {consonants}");
 
         }
+
+        // 10. Write a C# Sharp program to find the maximum number of characters in a string
+        static void Task_58()
+        {
+            Console.Write("Input your string: ");
+            string str = Console.ReadLine().ToLower();
+
+            int maxCount = 0;           // This will keep track of the highest number of times any character appears
+            char mostFrequentChar = ' '; // This will store the character that appears the most
+
+            // Go through each character in the string
+            for (int i = 0; i < str.Length; i++)
+            {
+                int count = 0; // This will count how many times the current character appears
+
+                // Compare the current character to every character in the string
+                for (int j = 0; j < str.Length; j++)
+                    // If the characters match, increase the count
+                    if (str[i] == str[j])
+                        count++;
+
+                /* If this character appears more times than any previous character,
+                    update maxCount and mostFrequentChar */
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                    mostFrequentChar = str[i];
+                }
+            }
+
+            // Show the results here:
+            Console.WriteLine($"The Highest frequency of character '{mostFrequentChar}'");
+            Console.WriteLine($"appears number of times : {maxCount}");
+        }
+
+        /*11. Write a C# Sharp program to sort a string array in ascending order.
+            Test Data :
+            Input the string : this is a string
+            Expected Output :
+            After sorting the string appears like :
+            a g h i i i n r s s s t t*/
+
+        static void Task_59()
+        {
+            Console.Write("Input the string : ");
+            string str = Console.ReadLine(); // Read a string from the user
+            char[] characters = str.ToCharArray(); // Convert the string to a character array
+            
+            Array.Sort(characters); // Sort the character array in ascending order
+            /* orrrrr:
+            for (int i = 0; i < str.Length; i++) // Iterate through the string
+                for (int j = i + 1; j < str.Length; j++) // Compare each character with the next ones
+                    if (str[i] > str[j]) // If the current character is greater than the next one
+                    {
+                        char temp = str[i]; // Swap them
+                        str[i] = str[j];
+                        str[j] = temp;
+                    } */
+            Console.WriteLine("After sorting the string appears like :");
+            foreach (char c in characters) // Iterate through each character in the sorted array
+                Console.Write(c + " "); // Print each character followed by a space
+        }
+
         public static void Main(string[] args)
         {
             while (true)
             {
-                Task_48();
+                Task_59();
                 Console.WriteLine();
             }
         }
