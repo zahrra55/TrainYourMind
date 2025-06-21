@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Reflection.Metadata;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices.JavaScript;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -1002,13 +1004,7 @@ namespace Zahra_Solutions
                 $"\nNumber of characters copied : {n}"); // Print the copied string
         }
 
-        /*9. Write a C# Sharp program to count the number of vowels or consonants in
-            a string.
-            Test Data :
-            Input the string : Welcome to halalAlmashakl.com
-            Expected Output :
-            The total number of vowel in the string is : 9
-            The total number of consonant in the string is : 12*/
+        // 9. Write a C# Sharp program to count the number of vowels or consonants in a string.   
         static void Task_57()
         {
             Console.Write("Input the string :");
@@ -1062,13 +1058,7 @@ namespace Zahra_Solutions
             Console.WriteLine($"appears number of times : {maxCount}");
         }
 
-        /*11. Write a C# Sharp program to sort a string array in ascending order.
-            Test Data :
-            Input the string : this is a string
-            Expected Output :
-            After sorting the string appears like :
-            a g h i i i n r s s s t t*/
-
+        // 11. Write a C# Sharp program to sort a string array in ascending order.
         static void Task_59()
         {
             Console.Write("Input the string : ");
@@ -1090,11 +1080,429 @@ namespace Zahra_Solutions
                 Console.Write(c + " "); // Print each character followed by a space
         }
 
+        // 12. Write a C# Sharp program to read a string through the keyboard and sort it using bubble sort.
+            
+        static void Task_60()
+        {
+            Console.Write("Test Data : \nInput number of strings : ");
+            int n = int.Parse(Console.ReadLine()); // Read the number of strings from the user
+            Console.WriteLine("Input " + n + " strings below :");
+            string[] strings = new string[n]; // Create an array to hold the strings
+            for (int i = 0; i < n; i++) // Read each string from the user
+            {
+                strings[i] = Console.ReadLine();
+            }
+            // Bubble sort algorithm to sort the strings
+            for (int i = 0; i < n - 1; i++) // Outer loop for the number of passes
+            {
+                for (int j = 0; j < n - i - 1; j++) // Inner loop for comparing adjacent strings (starts with n - i - 1 which means ex: n=3, i=0, j=0 then compare 1, 2)
+                {
+                    if (string.Compare(strings[j], strings[j + 1]) > 0) //strings[j] means the first string, strings[j + 1] means the second string
+                    // Compare the two strings if the first string is greater than the second string then swap them
+                    // 0 means equal, < 0 means first is less than second, > 0 means first is greater than second
+                    {
+                        // Swap
+                        string temp = strings[j];
+                        strings[j] = strings[j + 1];
+                        strings[j + 1] = temp;
+                    }
+                }
+            }
+            Console.WriteLine("After sorting the array appears like :");
+            foreach (string str in strings) // Iterate through each string in the sorted array
+            {
+                Console.WriteLine(str); // Print each string on a new line
+            }
+        }
+        // 13. Write a program in C# Sharp to extract a substring from a given string without using the library function.
+        static void Task_61()
+        {
+            Console.Write("Test Data: \nInput the string : ");
+            string str = Console.ReadLine(); // Read a string from the user
+            Console.Write("Input the position to start extraction :");
+            int start = int.Parse(Console.ReadLine()); // Read the starting position for extraction
+            Console.Write("Input the length of substring :");
+            int length = int.Parse(Console.ReadLine()); // Read the length of the substring
+            string str2 = ""; // Initialize an empty string to hold the extracted substring
+            for (int i = start; i < start + length; i++) // Iterate from the starting position to the specified length or until the end of the string
+            {
+                if (i >= str.Length) // Check if the index is out of bounds
+                {
+                    Console.WriteLine("Out of bounds buddy, check your inputs..");
+                    return; // Exit if the index is out of bounds
+                }
+               str2 += str[i]; // Append the character at the current index to the substring
+            }
+            Console.WriteLine($"The substring retrieve from the string is : {str2}"); // Print the extracted substring
+        }
+
+        // 14. Write a C# Sharp program to check whether a given substring is present in the given string.
+        static void Task_62()
+        {
+            Console.Write("Test Data : \nInput the string : ");
+            string str = Console.ReadLine(); // Read a string from the user
+            Console.Write("Input the substring to search : ");
+            string subStr = Console.ReadLine(); // Read the substring to search for
+            
+            if (str.Contains(subStr)) // Check if the main string contains the substring
+                Console.WriteLine("The substring exists in the string"); // If it does, print this message
+            else
+                Console.WriteLine("The substring doesn't exist in the string!!"); // If it doesn't, print this message
+        }
+        // 15. Write a C# Sharp program to read a sentence and replace lowercase characters with uppercase and vice-versa.
+        static void Task_63()
+        {
+            Console.Write("Test Data : \nInput the string : ");
+            string str = Console.ReadLine(); // Read a string
+            string result = ""; // empty string to hold the result
+            
+            foreach (char c in str) // شوف الحروف وحدة وحدة
+            {
+                if (char.IsLower(c)) // اذا الحرف صغير
+                    result += char.ToUpper(c); // كبره و ضيفه للنتيجة
+                else if (char.IsUpper(c)) // اذا كبير 
+                    result += char.ToLower(c); // صغره و ضيفه للنتيجة
+                else
+                    result += c; // اذا لا هاي و لا هاي مثلا رقم رمز سبيس ف ضيفه مثل ما هو
+            }
+            
+            Console.WriteLine($"The modified string is : {result}"); // و اطبعلي النتيجة و بس والله
+        }
+        // 16. Write a program in C# Sharp to check the username and password
+        /*Test Data :
+            Input a username: uesr
+            Input a password: pass
+            Input a username: abcd
+            Input a password: 1234
+            Expected Output :
+            Password entered successfully!*/
+        static void Task_64()
+        {
+            Console.Write("Input a username: ");
+            string username = Console.ReadLine(); // Read username
+            Console.Write("Input a password: ");
+            string password = Console.ReadLine(); // Read password
+            Console.Write("Input a username: ");
+            string username2 = Console.ReadLine();
+            Console.Write("Input a password: ");
+            string password2 = Console.ReadLine();
+
+            if (username == "uesr" && password == "pass" && username2 == "abcd" && password2 == "1234") // if the username and password match the expected values
+                Console.WriteLine("Password entered successfully!"); // print this message
+            else
+                Console.WriteLine("Invalid username or password!"); // if not, print this
+        }
+
+        // 17. Write a program in C# Sharp to search for the position of a substring within a string.
+        static void Task_65()
+        {
+            Console.Write("Test Data :\nInput a String: ");
+            string str = Console.ReadLine(); // Read the main string
+            Console.Write("Input a substring to be found in the string: ");
+            string subStr = Console.ReadLine(); // Read the substring
+            
+            int position = str.IndexOf(subStr); // Find the position of the substring in the main string
+            
+            if (position == -1) // If the substring is not found
+                Console.WriteLine($"'{subStr}' is not in '{str}'!!"); // If not found, print this message
+            Console.WriteLine($"Found '{subStr}' in '{str}' at position {position}"); // Print the position
+        }
+
+        /*8. Write a C# Sharp program to check whether a character is an alphabet
+            and not and if so, check for the case.
+            Test Data :
+            Input a character: Z
+            Expected Output :
+            The character is uppercase.*/
+        static void Task_66()
+        {
+            Console.Write("Test Data : \nInput a character: ");
+            char ch = Console.ReadKey().KeyChar; // Read a character
+            if(!char.IsLetter(ch)) // Check if the character is an alphabet
+            {
+                Console.WriteLine("\nThe character is not an alphabet!"); // If not, print this
+                return; // Terminate!
+            }
+            // If it is an alphabet, check for the case
+            if (char.IsUpper(ch)) // If the character is uppercase
+                Console.WriteLine("\nThe character is uppercase.");
+            else if (char.IsLower(ch)) // If the character is lowercase
+                Console.WriteLine("\nThe character is lowercase.");
+        }
+
+        // 9. Write a program in C# Sharp to find the number of times a substring appears in a given string.
+        static void Task_67()
+        {
+            Console.Write("Test Data : \nInput the original string: ");
+            string str = Console.ReadLine(); // Read the original string
+            Console.Write("Input the string to be searched for: ");
+            string subStr = Console.ReadLine(); // Read the substring to search for
+            
+            int count = 0; // Initialize a counter for occurrences
+            int index = str.IndexOf(subStr); // Find the first occurrence of the substring
+            
+            for (; index != -1; index = str.IndexOf(subStr, index + 1)) // if the substring is found, continue searching for the next occurrence
+            {
+                // The loop continues until no more occurrences are found (index becomes -1)
+                // index = str.IndexOf(subStr, index + 1) means we start searching from the next character after the last found occurrence
+                // index + 1 ensures we don't count the same occurrence again( IndexOf(value, startIndex) searches for the value starting from the specified index)
+
+                count++; // Increment the counter for each occurrence found
+            }
+            Console.WriteLine($"The string '{subStr}' occurs {count} times"); // Print the result
+        }
+
+        // 20. Write a program in C# Sharp to insert a substring before the first occurrence of a string.
+        static void Task_68()
+        {
+            Console.Write("Test Data : \nInput the original string: ");
+            string str = Console.ReadLine(); // Read the original string
+            Console.Write("Input the string to be searched for: ");
+            string subStr = Console.ReadLine(); // Read the substring to search for
+            Console.Write("Input the string to be inserted: ");
+            string insert_str = Console.ReadLine(); // Read the string to be inserted
+            
+            int index = str.IndexOf(subStr); // Find the first occurrence of the substring
+            
+            if (index == -1) // -1 means the substring is not there :/
+            {
+                Console.WriteLine($"'{subStr}' is not found in {str}!!!");
+                return; // Terminate the program if the substring is not found
+            }
+            
+            // Insert the new string before the first occurrence of the substring
+            string modifiedStr = str.Insert(index, insert_str );
+            // Insert(start index, string value) means we insert the insert_str at the index of the first occurrence of subStr
+            // اذاكانت subStr موجودة في ال str راح نضيف insert_str قبلها
+            Console.WriteLine($"The modified string is: {modifiedStr}"); // Print the modified string
+        }
+
+        /*21. Write a C# Sharp program to compare (less than, greater than, equal to)
+            two substrings.
+            Expected Output :
+            str1 = 'computer', str2 = 'system'
+            Substring 'mp' in 'computer' is less than substring 'sy' in 'system'.*/
+        static void Task_69()
+        {
+            Console.Write("Test Data : \nInput the first string: ");
+            string str1 = Console.ReadLine(); // Read the first string
+            Console.Write("Input the second string: ");
+            string str2 = Console.ReadLine(); // Read the second string
+            
+            Console.Write("Input the first substring to compare: ");
+            string subStr1 = Console.ReadLine(); // Read the first substring
+            Console.Write("Input the second substring to compare: ");
+            string subStr2 = Console.ReadLine(); // Read the second substring
+            
+            int compare = string.Compare(subStr1, subStr2); // Compare the two substrings
+
+            Console.WriteLine($"str1 = '{str1}', str2 = '{str2}'");
+
+            if (compare < 0) // If subStr1 is less than subStr2
+                Console.WriteLine($"Substring '{subStr1}' in '{str1}' is less than substring '{subStr2}' in '{str2}'.");
+            else if (compare > 0) // If subStr1 is greater than subStr2
+                Console.WriteLine($"Substring '{subStr1}' in '{str1}' is greater than substring '{subStr2}' in '{str2}'.");
+            else // If they are equal
+                Console.WriteLine($"Substring '{subStr1}' in '{str1}' is equal to substring '{subStr2}' in '{str2}'.");
+        }
+
+        /*22. Write a C# Sharp program to compare two substrings that only differ in
+            case. The first comparison ignores case and the second comparison
+            considers case. */
+        static void Task_70()
+        {
+            Console.Write("Input the first string: ");
+            string str1 = Console.ReadLine();
+            Console.Write("Input the second string: ");
+            string str2 = Console.ReadLine();
+            Console.Write("Input the first substring to compare: ");
+            string subStr1 = Console.ReadLine();
+            Console.Write("Input the second substring to compare: ");
+            string subStr2 = Console.ReadLine();
+
+            Console.WriteLine($"str1 = '{str1}', str2 = '{str2}'");
+
+            // Ignore case comparison:
+            int ignoreCaseCompare = string.Compare(subStr1.ToLower(), subStr2.ToLower());
+            if (ignoreCaseCompare > 0)
+                Console.WriteLine("Ignore case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is greater than substring '{subStr2}' in '{str2}'.");
+            else if (ignoreCaseCompare < 0)
+                Console.WriteLine("Ignore case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is less than substring '{subStr2}' in '{str2}'.");
+            else
+                Console.WriteLine("Ignore case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is equal to substring '{subStr2}' in '{str2}'.");
+
+            // Honor case comparison:
+            int honorCaseCompare = string.Compare(subStr1, subStr2);
+            if (honorCaseCompare > 0)
+                Console.WriteLine("Honor case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is greater than substring '{subStr2}' in '{str2}'.");
+            else if (honorCaseCompare < 0)
+                Console.WriteLine("Honor case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is less than substring '{subStr2}' in '{str2}'.");
+            else
+                Console.WriteLine("Honor case: \n" +
+                    $"Substring '{subStr1}' in '{str1}' is equal to substring '{subStr2}' in '{str2}'.");
+        }
+
+        // 23, 24, 25 are left for later :)
+
+        /*. Write a program in C# Sharp to display the first 10 natural numbers.
+            Expected Output :
+            1 2 3 4 5 6 7 8 9 10*/
+        static void Task_74()
+        {
+            for(int i = 1; i <= 10; i++) // Loop from 1 to 10
+            {
+                Console.Write(i + " "); // Print each number followed by a space
+            }
+        }
+
+        /*2. Write a C# Sharp program to find the sum of the first 10 natural numbers.*/
+        static void Task_75()
+        {
+            int sum = 0;
+            Console.Write("The first 10 natural numbers are: ");
+            for (int i = 1; i <= 10; i++) // Loop from 1 to 10
+            {
+                Console.Write(i + " "); // Print numbers with a space
+                sum += i; // Add numbers to the sum
+            }
+            Console.WriteLine($"\nThe Sum is: {sum}"); // Print the total sum
+        }
+
+        /*3. Write a C# Sharp program that displays the sum of n natural numbers.*/
+        static void Task_76()
+        {
+            Console.Write("Test Data : ");
+            int n = int.Parse(Console.ReadLine()); // Read the number of natural numbers to sum
+            int sum = 0; // Initialize sum variable
+            
+            Console.Write($"The first {n} natural numbers are: ");
+            for (int i = 1; i <= n; i++) // Loop from 1 to n
+            {
+                Console.Write(i + " "); // Print each natural number followed by a space
+                sum += i; // Add each number to the sum
+            }
+            Console.WriteLine($"\nThe Sum of Natural Number up to {n} terms: {sum}"); // Print the total sum
+        }
+
+        /*4. Write a C# Sharp program to read 10 numbers and find their average and sum.*/
+        static void Task_77()
+        {
+            int sum = 0;
+            Console.WriteLine("Input the 10 numbers :");
+            for (int i = 1; i <= 10; i++) // Loop to read 10 numbers
+            {
+                Console.Write($"Number-{i} : ");
+                int num = int.Parse(Console.ReadLine()); // Read each number from the user
+                sum += num; // Add the number to the sum
+            }
+            double average = sum / 10.0; // Calculate the average by dividing the sum by 10.0 to ensure a double result
+            Console.WriteLine($"The sum of 10 no is : {sum}"); // Print the sum
+            Console.WriteLine($"The Average is : {average:F6}"); // Print the average with 6 decimal places
+        }
+
+        /*5. Write a C# Sharp program to display the cube of an integer up to given number.*/
+        static void Task_78()
+        {
+            Console.Write("Input number of terms : ");
+            int n = int.Parse(Console.ReadLine()); // Read the number of terms from the user
+            
+            for (int i = 1; i <= n; i++) // Loop from 1 to n
+            {
+                int cube = i * i * i; // Calculate the cube of the current number
+                Console.WriteLine($"Number is : {i} and cube of the {i} is : {cube}"); // Print the number and its cube
+            }
+        }
+        /*6. Write a program in C# Sharp to display the multiplication table of a given integer.*/
+        static void Task_79()
+        {
+            Console.Write("Input the number (Table to be calculated) : ");
+            int n = int.Parse(Console.ReadLine()); // Read the number to be multiplied
+
+            for (int i = 1; i <= 10; i++) // Loop from 1 to 10
+            {
+                Console.WriteLine($"{n} X {i} = {n * i}"); // Print the multiplication table
+            }
+        }
+
+        //Task 80 and 81 (Q7 and Q8) are left FOR LATER...
+        
+        // 9. Write a program in C# Sharp to display a right angle triangle with an asterisk.
+        static void Task_80()
+        {
+            Console.Write("how many rows? ");
+            int rows = int.Parse(Console.ReadLine()); // Read the number of rows for the triangle
+            for (int i = 0; i < rows; i++) // Loop through each row
+            {
+                for(int j = 0; j <= i; j++) // Loop through each column in the current row
+                {
+                    Console.Write("*"); // Print an asterisk for each row
+                }
+                Console.WriteLine(); // Move to the next line after printing asterisks for the current row
+            }
+        }
+
+        // 10. Write a program in C# Sharp to display a pattern like a right angle triangle with a number.
+        /*
+         1
+         12
+         123
+         1234
+         */
+        static void Task_81()
+        {
+            Console.Write("how many rows? ");
+            int rows = int.Parse(Console.ReadLine()); // Read the number of rows for the triangle
+            for (int i = 1; i <= rows; i++) // Loop through each row
+            {
+                for (int j = 1; j <= i; j++) // Loop through each column in the current row
+                {
+                    Console.Write(j); // Print the current number
+                }
+                Console.WriteLine(); // Move to the next line after printing numbers for the current row
+            }
+        }
+
+        /*11. Write a program in C# Sharp to make such a pattern like a right angle
+        triangle with a number which repeats a number in a row. 
+        1
+        22
+        333
+        4444
+         */
+        static void Task_82()
+        {
+            Console.Write("how many rows? ");
+            int rows = int.Parse(Console.ReadLine()); // Read the number of rows for the triangle
+            for (int i = 1; i <= rows; i++) // Loop through each row
+            {
+                for (int j = 1; j <= i; j++) // Loop through each column in the current row
+                {
+                    Console.Write(i); // Print the current row number
+                }
+                Console.WriteLine(); // Move to the next line after printing numbers for the current row
+            }
+        }
+
+        //15. Write a C# Sharp program to calculate the factorial of a given number.
+        static int Task_83(int n)
+        {
+            if(n <=1 )
+                return 1; 
+            return n * Task_83(n - 1); //recursion
+
+        }
         public static void Main(string[] args)
         {
             while (true)
             {
-                Task_59();
+                Console.Write("Test Data: \nInput the number : ");
+                int n = int.Parse(Console.ReadLine());
+                Console.WriteLine(Task_83(n));
                 Console.WriteLine();
             }
         }
